@@ -6,7 +6,7 @@ export const getUsers = async (req, res) => {
         const { rows } = await pool.query("SELECT * FROM users");
         res.json(rows); 
     } catch (error) {
-        return res.status(404).json({error: "error"})
+        return res.status(500).json({error: "error"})
     }
 
 }
@@ -44,11 +44,11 @@ export const deleteUser = async (req, res) => {
         const { id } = req.params;
         const { rowCount } = await pool.query("DELETE FROM users WHERE id = $1 RETURNING *", [id]);
         if (rowCount === 0) {
-            return res.status(404).json({ message: "Usuario no encontrado" })
+            return res.status(400).json({ message: "Usuario no encontrado" })
         }
         return res.sendStatus(204);
     } catch (error) {
-        return res.status(404).json({error: "error"})
+        return res.status(500).json({error: "error"})
     }
 
 }
@@ -60,11 +60,11 @@ export const putUser = async (req, res) => {
         const { name, email } = req.body;
         const { rows, rowCount } = await pool.query("UPDATE users SET name = $1, email = $2 WHERE id = $3 RETURNING *", [name, email, id]);
         if (rowCount === 0){
-            return res.status(404).json({error: "error"})
+            return res.status(400).json({error: "error"})
         }
         return res.json(rows[0]);
     } catch (error) {
-        return res.status(404).json({error: "error"})
+        return res.status(500).json({error: "error"})
     }
 }
 
