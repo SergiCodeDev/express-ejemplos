@@ -16,10 +16,10 @@ npm i express
 npm i express -E
 ```
 
-### Editar package.json: 
+### Editar package.json para poder usar imports: 
 
 ```json
-"type": "module", para poder usar imports
+"type": "module",
 ```
 
 ### Instala zod
