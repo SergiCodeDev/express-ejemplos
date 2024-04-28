@@ -1,0 +1,4 @@
+node_modules/
+front/
+package-lock.json
+peliculas.json
